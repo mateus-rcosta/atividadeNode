@@ -92,3 +92,41 @@ exports.deleteEndereco = async(req, res) =>{
         res.status(500).json({error: 'Erro ao deletar endereço', details: error.message});
     }
 };
+
+//controller da atividade complementar 23/08/2024
+//cria endereco pelo cep 
+exports.CriaEnderecoCep = async (req, res) => {
+    //tratamento de erro 
+    try {
+        const recep = req.params.cep;
+
+        //faz requisicao a api
+        const response = await axios.get(`https://viacep.com.br/ws/${recep}/json/`);
+        
+        //se nao pegar nada
+        if (response.data.erro) {
+            //retorno de erro 404
+            return res.status(404).json({ error: 'CEP não encontrado' });
+        }
+        
+        const { logradouro, complemento, bairro, localidade, uf, ibge } = response.data;
+
+        //criando novo endereco no banco
+        const novoEndereco = await Endereco.create({
+            Cep,
+            Logradouro: logradouro,
+            Numero: '', //salvando string vazia, api nao retorna numero
+            Complemento: complemento,
+            Bairro: bairro,
+            Cidade: localidade,
+            Estado: uf,
+            MunicipioIBGE: ibge
+        });
+
+        //retorno 201 caso consiga criar no bano
+        res.status(201).json(novoEndereco);
+    //caso nao consiga salvar 
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao salvar endereço', details: error.message });
+    }
+};
