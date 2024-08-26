@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "nodeJs",
+    "password": 10203040,
+    "database": "api_node",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "nodeJs",
+    "password": 10203040,
+    "database": "api_node",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "nodeJs",
+    "password": 10203040,
+    "database": "api_node",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
