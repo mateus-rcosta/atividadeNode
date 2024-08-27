@@ -8,6 +8,7 @@ router.get('/enderecos', endereController.getAllEnderecos);
 router.get('/enderecos/:ID', endereController.getEnderecoById);
 router.put('/enderecos/:ID', endereController.updateEndereco);
 router.delete('/enderecos/:ID', endereController.deleteEndereco);
-
+//rota da atividade complementar 23/08
+router.post('/enderecos/:cep', enderecoController.CriaEnderecoCep);
 module.exports = router;
 
